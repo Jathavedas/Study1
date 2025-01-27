@@ -3,8 +3,9 @@ import { useQuery } from "@tanstack/react-query";
 import Axios from "axios";
 
 const Home = () => {
-  const { data, isLoading, error } = useQuery(["cat"], () => {
-    return Axios.get("https://catfact.ninja/fact").then((res) => res.data);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["cat"],
+    queryFn: () => Axios.get("https://catfact.ninja/fact").then((res) => res.data)
   });
 
   if (isLoading) return <div>Loading...</div>;
